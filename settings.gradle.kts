@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Candidate Live Challenge"
-include ':app'
+include(":app")

@@ -22,7 +22,7 @@ Use the following public API to implement the task: https://docs.coincap.io/
 
 ## Deliverables:
 * Source code of the Android application
-* Documentation explaining the implementation details and the arachitecture of the application.
+* Documentation explaining the implementation details and the architecture of the application.
 * Optionally, provide a demo video or screenshots showcasing the functionality of the application.
 
 ## Submission:
