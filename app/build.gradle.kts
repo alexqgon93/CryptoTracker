@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -22,6 +23,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val localProperties = gradleLocalProperties(rootDir, providers)
+        val apiKey: String = localProperties.getProperty("api_key")
+        buildConfigField("String", "api_key", value = "\"${apiKey}\"")
     }
 
     buildTypes {
@@ -44,11 +48,9 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
-
-val localProperties = gradleLocalProperties(rootDir, providers)
-val apiKey: String = localProperties.getProperty("api_key")
 
 dependencies {
 
@@ -61,9 +63,11 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.material3)
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -75,21 +79,13 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.converter.moshi)
+    implementation(libs.arrow.core)
     ksp(libs.moshi.kotlin.codegen)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:3.0.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-
-    // Rx
-    implementation("io.reactivex.rxjava3:rxjava:3.1.12")
-    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
-
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    // testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
 
     // Image Loading
     implementation("com.github.bumptech.glide:glide:5.0.5")
@@ -100,4 +96,5 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation(libs.mockk)
 
+    debugImplementation(libs.androidx.ui.tooling)
 }

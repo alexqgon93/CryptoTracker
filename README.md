@@ -5,7 +5,7 @@ Develop an Android application that displays a list of the best/worst performing
 
 ## Requirements:
 * Display a list of the top 10 crypto coins based on price change percentage over the last 24 hours.
-* Provide a way to switch between the the 10 best and 10 worst performing crypto coins
+* Provide a way to switch between the 10 best and 10 worst performing crypto coins
 * Each list items should contain the following asset info:
     * Name
     * Symbol
