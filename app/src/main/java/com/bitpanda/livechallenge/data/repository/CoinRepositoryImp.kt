@@ -1,8 +1,8 @@
 package com.bitpanda.livechallenge.data.repository
 
 import arrow.core.Either
-import com.bitpanda.livechallenge.data.AssetsMapper
-import com.bitpanda.livechallenge.data.RatesMapper
+import com.bitpanda.livechallenge.data.mappers.AssetsMapper
+import com.bitpanda.livechallenge.data.mappers.RatesMapper
 import com.bitpanda.livechallenge.data.remote.api.CryptoCoroutinesApi
 import com.bitpanda.livechallenge.data.utils.mapResult
 import com.bitpanda.livechallenge.data.utils.tryCall

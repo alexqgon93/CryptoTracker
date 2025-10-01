@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.android.junit)
 }
 
 android {
@@ -50,11 +51,11 @@ android {
         compose = true
         buildConfig = true
     }
+
 }
 
 dependencies {
 
-    // Support libs
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -65,10 +66,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.material3)
+    testImplementation(libs.junit.jupiter)
+    debugImplementation(libs.androidx.ui.tooling)
+
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel)
@@ -82,10 +87,19 @@ dependencies {
     implementation(libs.arrow.core)
     ksp(libs.moshi.kotlin.codegen)
 
+    // Unit Testing
     testImplementation(libs.junit)
-    testImplementation("org.mockito:mockito:4.8.0")
-    testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation(libs.mockk)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
 
-    debugImplementation(libs.androidx.ui.tooling)
+    // Android testing
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.mockk.android)
 }

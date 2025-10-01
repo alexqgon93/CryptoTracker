@@ -1,4 +1,4 @@
-package com.bitpanda.livechallenge.data
+package com.bitpanda.livechallenge.data.mappers
 
 import com.bitpanda.livechallenge.data.remote.responses.NetworkRate
 import com.bitpanda.livechallenge.data.utils.ResultMapper
