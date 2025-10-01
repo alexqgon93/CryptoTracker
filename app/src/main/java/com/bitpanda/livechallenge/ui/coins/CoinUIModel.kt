@@ -6,5 +6,6 @@ data class CoinUIModel(
     val rank: Int,
     val symbol: String,
     val price: String,
-    val changePercent24Hr: String,
+    val changePercent24Hr: Double,
+    val priceDifference24Hr: Double,
 )

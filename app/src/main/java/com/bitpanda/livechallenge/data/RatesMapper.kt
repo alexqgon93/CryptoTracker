@@ -11,7 +11,7 @@ class RatesMapper @Inject constructor() : ResultMapper<List<NetworkRate>, List<R
     private fun NetworkRate.toDomainModel(): Rate = Rate(
         id = id,
         symbol = symbol,
-        currencySymbol = symbol,
+        currencySymbol = currencySymbol,
         rateUsd = rateUsd,
         type = type
     )

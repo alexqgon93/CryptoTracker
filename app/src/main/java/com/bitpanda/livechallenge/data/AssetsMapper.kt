@@ -12,8 +12,8 @@ class AssetsMapper @Inject constructor() : ResultMapper<List<NetworkAsset>, List
         id = id,
         name = name,
         symbol = symbol,
-        priceUsd = priceUsd,
-        changePercent24Hr = changePercent24Hr.toString().format("%.2f").toDouble(),
+        price = priceUsd,
+        changePercent24Hr = changePercent24Hr,
         rank = rank.toInt(),
     )
 }

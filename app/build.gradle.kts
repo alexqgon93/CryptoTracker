@@ -82,15 +82,6 @@ dependencies {
     implementation(libs.arrow.core)
     ksp(libs.moshi.kotlin.codegen)
 
-    // Coroutines
-    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    // testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
-
-    // Image Loading
-    implementation("com.github.bumptech.glide:glide:5.0.5")
-    ksp("com.github.bumptech.glide:compiler:5.0.5")
-
     testImplementation(libs.junit)
     testImplementation("org.mockito:mockito:4.8.0")
     testImplementation("org.mockito:mockito-inline:5.2.0")
