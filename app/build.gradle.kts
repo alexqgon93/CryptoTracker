@@ -1,6 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.android.junit)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -51,7 +52,16 @@ android {
         compose = true
         buildConfig = true
     }
+}
 
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+    }
 }
 
 dependencies {
@@ -87,6 +97,12 @@ dependencies {
     implementation(libs.arrow.core)
     ksp(libs.moshi.kotlin.codegen)
 
+    // Ktor
+    implementation(libs.ktor.client.websocket)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.content.negotiation)
+
     // Unit Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
@@ -100,6 +116,7 @@ dependencies {
     // Android testing
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    androidTestImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.mockk.android)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

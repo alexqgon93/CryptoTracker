@@ -1,19 +1,18 @@
 package com.bitpanda.livechallenge.data
 
 import com.bitpanda.livechallenge.data.mappers.RatesMapper
-import com.bitpanda.livechallenge.data.remote.responses.NetworkRate
 import com.bitpanda.livechallenge.domain.models.Rate
+import com.bitpanda.livechallenge.network.responses.NetworkRate
 import io.kotest.matchers.shouldBe
+import java.util.stream.Stream
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RatesMapperTest {
-
     private lateinit var mapper: RatesMapper
 
     @BeforeEach
@@ -25,7 +24,7 @@ class RatesMapperTest {
     @MethodSource("provideDataToTest")
     fun `GIVEN NetworkRates WHEN map THEN return Rate`(
         input: List<NetworkRate>,
-        output: List<Rate>,
+        output: List<Rate>
     ) {
         mapper.map(input) shouldBe output
     }
@@ -39,15 +38,16 @@ class RatesMapperTest {
                 symbol = "USD",
                 currencySymbol = "$",
                 rateUsd = "1.0000000000000000",
-                type = "fiat",
+                type = "fiat"
             )
-        ), listOf(
+        ),
+        listOf(
             Rate(
                 id = "united-states-dollar",
                 symbol = "USD",
                 currencySymbol = "$",
                 rateUsd = "1.0000000000000000",
-                type = "fiat",
+                type = "fiat"
             )
         )
     )

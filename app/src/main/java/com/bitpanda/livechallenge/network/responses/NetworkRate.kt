@@ -1,4 +1,4 @@
-package com.bitpanda.livechallenge.data.remote.responses
+package com.bitpanda.livechallenge.network.responses
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

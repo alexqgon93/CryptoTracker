@@ -3,15 +3,15 @@ package com.bitpanda.livechallenge.domain.models
 import org.junit.jupiter.api.Test
 
 class AssetTest {
-
-    val asset = Asset(
-        id = "1",
-        name = "Bitcoin",
-        rank = 1,
-        symbol = "BTC",
-        price = 100.0,
-        changePercent24Hr = 10.0
-    )
+    val asset =
+        Asset(
+            id = "1",
+            name = "Bitcoin",
+            rank = 1,
+            symbol = "BTC",
+            price = 100.0,
+            changePercent24Hr = 10.0
+        )
 
     @Test
     fun `GIVEN zero percent WHEN priceDifference24Hr is called THEN returns zero`() =
@@ -22,7 +22,7 @@ class AssetTest {
         assert(10.0 == asset.priceDifference24Hr(changePercent = 10.0))
 
     @Test
-    fun `GIVEN negative percent WHEN priceDifference24Hr is called THEN returns correct negative value`() =
+    fun `GIVEN negative percent WHEN priceDifference24Hr THEN returns correct negative value`() =
         assert(-10.0 == asset.priceDifference24Hr(changePercent = -10.0))
 
     @Test
@@ -30,7 +30,7 @@ class AssetTest {
         assert(200.0 == asset.priceDifference24Hr(changePercent = 200.0))
 
     @Test
-    fun `GIVEN decimal percent WHEN priceDifference24Hr is called THEN returns correct decimal value`() =
+    fun `GIVEN decimal percent WHEN priceDifference24Hr THEN returns correct decimal value`() =
         assert(2.5 == asset.priceDifference24Hr(changePercent = 2.5))
 
     @Test

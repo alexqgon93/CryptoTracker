@@ -1,36 +1,40 @@
-package com.bitpanda.livechallenge.data.di
+package com.bitpanda.livechallenge.network.di
 
 import com.bitpanda.livechallenge.BuildConfig
-import com.bitpanda.livechallenge.data.remote.api.CryptoCoroutinesApi
+import com.bitpanda.livechallenge.network.api.CryptoCoroutinesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     private const val BASE_URL = "https://rest.coincap.io/v3/"
 
     @Provides
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient.Builder().addInterceptor { chain ->
-            val original = chain.request()
-            val request =
-                original.newBuilder().header("Authorization", "Bearer ${BuildConfig.api_key}")
-                    .build()
-            chain.proceed(request)
-        }.addInterceptor(httpLoggingInterceptor)
+        OkHttpClient
+            .Builder()
+            .addInterceptor { chain ->
+                val original = chain.request()
+                val request =
+                    original
+                        .newBuilder()
+                        .header("Authorization", "Bearer ${BuildConfig.api_key}")
+                        .build()
+                chain.proceed(request)
+            }.addInterceptor(httpLoggingInterceptor)
             .callTimeout(timeout = 10, unit = TimeUnit.SECONDS)
             .connectTimeout(timeout = 10, unit = TimeUnit.SECONDS)
             .writeTimeout(timeout = 10, unit = TimeUnit.SECONDS)
-            .readTimeout(timeout = 10, unit = TimeUnit.SECONDS).build()
+            .readTimeout(timeout = 10, unit = TimeUnit.SECONDS)
+            .build()
 
     @Provides
     fun providesMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
@@ -43,9 +47,13 @@ object NetworkModule {
     fun providesRetrofit(
         baseUrl: String,
         converterFactory: MoshiConverterFactory,
-        okHttpClient: OkHttpClient,
-    ): Retrofit = Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl)
-        .addConverterFactory(converterFactory).build()
+        okHttpClient: OkHttpClient
+    ): Retrofit = Retrofit
+        .Builder()
+        .client(okHttpClient)
+        .baseUrl(baseUrl)
+        .addConverterFactory(converterFactory)
+        .build()
 
     @Provides
     fun providesCryptoCoroutines(

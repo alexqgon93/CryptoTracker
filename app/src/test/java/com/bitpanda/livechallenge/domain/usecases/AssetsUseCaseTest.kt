@@ -6,13 +6,12 @@ import com.bitpanda.livechallenge.domain.models.Asset
 import com.bitpanda.livechallenge.domain.repository.CoinRepository
 import io.mockk.coEvery
 import io.mockk.mockk
+import java.io.IOException
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.io.IOException
 
 class AssetsUseCaseTest {
-
     private val repository: CoinRepository = mockk()
     private lateinit var assetsUseCase: AssetsUseCase
 
@@ -24,38 +23,43 @@ class AssetsUseCaseTest {
     @Test
     fun `Given NetworkError WHEN call the use case THEN error is received`() = runTest {
         val exception = IOException("Network Error")
-        coEvery { repository.getAssets() } returns Either.Left(
-            value = AppError.NetworkError(
-                exception = exception
+        coEvery { repository.getAssets() } returns
+            Either.Left(
+                value =
+                AppError.NetworkError(
+                    exception = exception
+                )
             )
-        )
         assert(assetsUseCase.invoke() == Either.Left(value = AppError.NetworkError(exception)))
     }
 
     @Test
     fun `Given BadRequest WHEN call the use case THEN error is received`() = runTest {
         val message = "Bad Request"
-        coEvery { repository.getAssets() } returns Either.Left(
-            value = AppError.BadRequest(message = message)
-        )
+        coEvery { repository.getAssets() } returns
+            Either.Left(
+                value = AppError.BadRequest(message = message)
+            )
         assert(assetsUseCase.invoke() == Either.Left(value = AppError.BadRequest(message)))
     }
 
     @Test
     fun `Given ServerError WHEN call the use case THEN error is received`() = runTest {
         val message = "ServerError Request"
-        coEvery { repository.getAssets() } returns Either.Left(
-            value = AppError.ServerError(message = message)
-        )
+        coEvery { repository.getAssets() } returns
+            Either.Left(
+                value = AppError.ServerError(message = message)
+            )
         assert(assetsUseCase.invoke() == Either.Left(value = AppError.ServerError(message)))
     }
 
     @Test
     fun `Given Unknown WHEN call the use case THEN error is received`() = runTest {
         val message = "Unknown Error message"
-        coEvery { repository.getAssets() } returns Either.Left(
-            value = AppError.Unknown(message = message)
-        )
+        coEvery { repository.getAssets() } returns
+            Either.Left(
+                value = AppError.Unknown(message = message)
+            )
         assert(assetsUseCase.invoke() == Either.Left(value = AppError.Unknown(message)))
     }
 
@@ -73,7 +77,8 @@ class AssetsUseCaseTest {
 
     @Test
     fun `Given NoConnection WHEN call the use case THEN error is received Error`() = runTest {
-        coEvery { repository.getAssets() } returns Either.Left(value = AppError.NoConnectionError)
+        coEvery { repository.getAssets() } returns
+            Either.Left(value = AppError.NoConnectionError)
         assert(assetsUseCase.invoke() == Either.Left(value = AppError.NoConnectionError))
     }
 

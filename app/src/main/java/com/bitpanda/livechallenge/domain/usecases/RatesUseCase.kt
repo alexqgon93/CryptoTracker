@@ -6,6 +6,8 @@ import com.bitpanda.livechallenge.domain.models.Rate
 import com.bitpanda.livechallenge.domain.repository.CoinRepository
 import javax.inject.Inject
 
-class RatesUseCase @Inject constructor(private val repository: CoinRepository) {
+class RatesUseCase
+@Inject
+constructor(private val repository: CoinRepository) {
     suspend operator fun invoke(): Either<AppError, List<Rate>> = repository.getRates()
 }

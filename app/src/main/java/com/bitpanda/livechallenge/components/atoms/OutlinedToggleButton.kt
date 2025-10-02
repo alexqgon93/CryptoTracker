@@ -33,19 +33,21 @@ fun OutlinedToggleButton(
     modifier = modifier.fillMaxWidth(),
     shape = RoundedCornerShape(size = Dimens.dimen_12),
     onClick = onClick,
-    colors = ButtonDefaults.outlinedButtonColors(
+    colors =
+    ButtonDefaults.outlinedButtonColors(
         containerColor = if (selected) Color.Black else Color.Transparent,
-        contentColor = if (selected) Color.White else Color.Black,
+        contentColor = if (selected) Color.White else Color.Black
     ),
-    border = BorderStroke(
+    border =
+    BorderStroke(
         width = Dimens.dimen_1,
         color = if (selected) Color.White else Color.Black
-    ),
+    )
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Icon(imageVector = icon, contentDescription = contentDescription)
         Text(text = text)
@@ -59,5 +61,5 @@ fun OutlinedToggleButtonPreview() = OutlinedToggleButton(
     onClick = {},
     icon = Filled.TrendingUp,
     text = stringResource(id = R.string.trending_top_title),
-    contentDescription = stringResource(id = R.string.trending_top_title),
+    contentDescription = stringResource(id = R.string.trending_top_title)
 )

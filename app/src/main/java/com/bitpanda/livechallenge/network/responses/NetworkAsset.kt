@@ -1,4 +1,4 @@
-package com.bitpanda.livechallenge.data.remote.responses
+package com.bitpanda.livechallenge.network.responses
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -10,5 +10,5 @@ data class NetworkAsset(
     @Json(name = "rank") val rank: String,
     @Json(name = "symbol") val symbol: String,
     @Json(name = "priceUsd") val priceUsd: Double,
-    @Json(name = "changePercent24Hr") val changePercent24Hr: Double,
+    @Json(name = "changePercent24Hr") val changePercent24Hr: Double
 )

@@ -6,6 +6,8 @@ import com.bitpanda.livechallenge.domain.models.Asset
 import com.bitpanda.livechallenge.domain.repository.CoinRepository
 import javax.inject.Inject
 
-class AssetsUseCase @Inject constructor(private val repository: CoinRepository) {
+class AssetsUseCase
+@Inject
+constructor(private val repository: CoinRepository) {
     suspend operator fun invoke(): Either<AppError, List<Asset>> = repository.getAssets()
 }

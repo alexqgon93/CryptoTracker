@@ -1,8 +1,8 @@
 package com.bitpanda.livechallenge.ui.theme
 
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 object Dimens {
     val dimen_1: Dp = 1.dp

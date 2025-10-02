@@ -8,7 +8,7 @@ data class Asset(
     val rank: Int,
     val symbol: String,
     val price: Double,
-    val changePercent24Hr: Double,
+    val changePercent24Hr: Double
 ) {
     fun priceDifference24Hr(changePercent: Double): Double =
         (price * (changePercent / 100)).formatToTwoDigits()
