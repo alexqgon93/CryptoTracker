@@ -4,4 +4,4 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class NetworkError(@Json(name = "error") val error: String)
+data class NetworkError(@param:Json(name = "error") val error: String)

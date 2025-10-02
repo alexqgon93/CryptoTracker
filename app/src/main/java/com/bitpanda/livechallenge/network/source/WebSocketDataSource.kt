@@ -25,11 +25,9 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.retryWhen
 import okio.IOException
 
-class WebSocketDataSource
-@Inject
-constructor(
-    @Named(WebSocketModule.Companion.WEBSOCKET_CLIENT) private val httpClient: HttpClient,
-    @Named(WebSocketModule.Companion.WEBSOCKET_URL_NAME) private val websocketUrl: String
+class WebSocketDataSource @Inject constructor(
+    @param:Named(WebSocketModule.Companion.WEBSOCKET_CLIENT) private val httpClient: HttpClient,
+    @param:Named(WebSocketModule.Companion.WEBSOCKET_URL_NAME) private val websocketUrl: String
 ) {
     companion object Companion {
         const val TAG = "AssetsSocketDataSource"
@@ -75,10 +73,10 @@ constructor(
 
     suspend fun disconnect() = webSocketSession.close(
         reason =
-        CloseReason(
-            code = CloseReason.Codes.NORMAL,
-            message = "Disconnect"
-        )
+            CloseReason(
+                code = CloseReason.Codes.NORMAL,
+                message = "Disconnect"
+            )
     )
 
     private suspend fun DefaultClientWebSocketSession.handleAsset(

@@ -5,9 +5,9 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class NetworkRate(
-    @Json(name = "id") val id: String,
-    @Json(name = "symbol") val symbol: String,
-    @Json(name = "currencySymbol") val currencySymbol: String?,
-    @Json(name = "rateUsd") val rateUsd: String,
-    @Json(name = "type") val type: String
+    @param:Json(name = "id") val id: String,
+    @param:Json(name = "symbol") val symbol: String,
+    @param:Json(name = "currencySymbol") val currencySymbol: String?,
+    @param:Json(name = "rateUsd") val rateUsd: String,
+    @param:Json(name = "type") val type: String
 )
