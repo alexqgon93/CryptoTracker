@@ -72,11 +72,7 @@ class WebSocketDataSource @Inject constructor(
     }
 
     suspend fun disconnect() = webSocketSession.close(
-        reason =
-            CloseReason(
-                code = CloseReason.Codes.NORMAL,
-                message = "Disconnect"
-            )
+        reason = CloseReason(code = CloseReason.Codes.NORMAL, message = "Disconnect")
     )
 
     private suspend fun DefaultClientWebSocketSession.handleAsset(
