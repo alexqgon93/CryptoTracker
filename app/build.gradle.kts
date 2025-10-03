@@ -54,6 +54,10 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 ktlint {
     android.set(true)
     ignoreFailures.set(false)

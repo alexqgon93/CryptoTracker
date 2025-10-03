@@ -26,8 +26,7 @@ import com.bitpanda.livechallenge.ui.theme.FontSizes
 
 @Composable
 fun ServerErrorScreen(modifier: Modifier = Modifier, onRetry: () -> Unit) = Box(
-    modifier =
-    modifier
+    modifier = modifier
         .fillMaxSize()
         .padding(all = Dimens.dimen_24),
     contentAlignment = Alignment.Center

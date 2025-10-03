@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.bitpanda.livechallenge.ui.coins.CoinUIModel
+import com.bitpanda.livechallenge.ui.formatToEuropean
 import com.bitpanda.livechallenge.ui.theme.Dimens
 import com.bitpanda.livechallenge.ui.theme.FontSizes
 
@@ -25,8 +26,7 @@ import com.bitpanda.livechallenge.ui.theme.FontSizes
 fun CoinRow(uiModel: CoinUIModel) {
     val isPositive = uiModel.changePercent24Hr >= 0.0
     Card(
-        modifier =
-        Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(all = Dimens.dimen_8),
         shape = RoundedCornerShape(size = Dimens.dimen_20),
@@ -35,37 +35,16 @@ fun CoinRow(uiModel: CoinUIModel) {
     ) {
         Row(modifier = Modifier.padding(horizontal = Dimens.dimen_24, vertical = Dimens.dimen_20)) {
             Column(
-                modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .weight(weight = 1f),
-                verticalArrangement = Arrangement.spacedBy(space = Dimens.dimen_8),
+                modifier = Modifier.fillMaxWidth().weight(weight = 1f),
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(space = Dimens.dimen_8),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier =
-                        Modifier
-                            .background(
-                                color = Color(color = 0xFFE5E7EB),
-                                shape = RoundedCornerShape(size = Dimens.dimen_16)
-                            ).padding(horizontal = Dimens.dimen_16, vertical = Dimens.dimen_8)
-                    ) {
-                        Text(
-                            text = "#${uiModel.rank}",
-                            fontSize = FontSizes.font_18,
-                            fontWeight = FontWeight.Light
-                        )
-                    }
-                    Text(
-                        text = uiModel.symbol,
-                        fontSize = FontSizes.font_18,
-                        fontWeight = FontWeight.Light
-                    )
-                }
+                Text(
+                    text = uiModel.symbol,
+                    fontSize = FontSizes.font_18,
+                    fontWeight = FontWeight.Light
+                )
+
                 Text(
                     text = uiModel.name,
                     fontSize = FontSizes.font_20,
@@ -82,28 +61,26 @@ fun CoinRow(uiModel: CoinUIModel) {
                     fontWeight = FontWeight.Normal
                 )
                 Box(
-                    modifier =
-                    Modifier
+                    modifier = Modifier
                         .background(
                             color = if (isPositive) {
-                                Color(
-                                    color = 0xFFD1FAE5
-                                )
+                                Color(color = 0xFFD1FAE5)
                             } else {
                                 Color(0xFFFEE2E2)
                             },
                             shape = RoundedCornerShape(size = Dimens.dimen_8)
-                        ).padding(horizontal = Dimens.dimen_8, vertical = Dimens.dimen_4)
+                        )
+                        .padding(horizontal = Dimens.dimen_8, vertical = Dimens.dimen_4)
                 ) {
                     Text(
-                        text = "${uiModel.changePercent24Hr} %",
+                        text = "${uiModel.changePercent24Hr.formatToEuropean()} %",
                         fontSize = FontSizes.font_16,
                         fontWeight = FontWeight.Normal,
                         color = if (isPositive) Color(color = 0xFF047857) else Color(0xFFDC2626)
                     )
                 }
                 Text(
-                    text = "${uiModel.priceDifference24Hr} €",
+                    text = uiModel.priceDifference24Hr,
                     fontSize = FontSizes.font_16,
                     fontWeight = FontWeight.Normal,
                     color = if (isPositive) Color(color = 0xFF047857) else Color(0xFFDC2626)
@@ -124,6 +101,6 @@ private fun CoinRowPreview() = CoinRow(
         price = "30000",
         changePercent24Hr = 2.5,
         rank = 1,
-        priceDifference24Hr = 25.0
+        priceDifference24Hr = "25.0"
     )
 )

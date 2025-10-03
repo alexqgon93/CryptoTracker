@@ -28,12 +28,13 @@ class CoinRowTest {
             )
         composeTestRule.setContent { CoinRow(uiModel = model) }
 
-        composeTestRule.onNodeWithText("#1").assertIsDisplayed()
-        composeTestRule.onNodeWithText("BTC").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Bitcoin").assertIsDisplayed()
-        composeTestRule.onNodeWithText("30000").assertIsDisplayed()
-        composeTestRule.onNodeWithText("2.5 %").assertIsDisplayed()
-        composeTestRule.onNodeWithText("25.0 €").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "#1").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "BTC").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "Bitcoin").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "30000").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "2.5 %").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "25.0 €").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Ethereum").assertDoesNotExist()
     }
 
     @Test
@@ -53,11 +54,12 @@ class CoinRowTest {
             CoinRow(uiModel = model)
         }
 
-        composeTestRule.onNodeWithText("#2").assertIsDisplayed()
-        composeTestRule.onNodeWithText("ETH").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Ethereum").assertIsDisplayed()
-        composeTestRule.onNodeWithText("1800").assertIsDisplayed()
-        composeTestRule.onNodeWithText("-1.2 %").assertIsDisplayed()
-        composeTestRule.onNodeWithText("-15.4 €").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "#2").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "ETH").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "Ethereum").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "1800").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "-1.2 %").assertIsDisplayed()
+        composeTestRule.onNodeWithText(text = "-15.4 €").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Bitcoin").assertDoesNotExist()
     }
 }

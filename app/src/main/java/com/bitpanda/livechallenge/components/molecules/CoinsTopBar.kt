@@ -25,8 +25,7 @@ fun CoinsTopBar(title: String) = TopAppBar(
             Text(text = title)
         }
     },
-    colors =
-    TopAppBarDefaults.topAppBarColors(
+    colors = TopAppBarDefaults.topAppBarColors(
         containerColor = Color.LightGray,
         titleContentColor = Color.Black
     )

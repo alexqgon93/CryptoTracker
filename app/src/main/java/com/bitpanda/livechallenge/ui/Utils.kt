@@ -1,7 +1,15 @@
 package com.bitpanda.livechallenge.ui
 
-fun Double.format(digits: Int): Double = "%.${digits}f".format(this).toDouble()
+import java.text.NumberFormat
+import java.util.Locale
+import kotlin.text.format
 
-fun Double.toEuroString(): String = "%,.2f €".format(this)
+fun Double.toCorrectCurrencyForm(): String =
+    NumberFormat.getCurrencyInstance(Locale.GERMANY).format(this)
 
-fun Double.formatToTwoDigits(): Double = this.format(2)
+fun Double.formatToTwoDigits(): Double = "%.${2}f".format(this).toDouble()
+
+fun Double.formatToEuropean(): String = NumberFormat.getNumberInstance(Locale.GERMANY).apply {
+    minimumFractionDigits = 2
+    maximumFractionDigits = 2
+}.format(this)

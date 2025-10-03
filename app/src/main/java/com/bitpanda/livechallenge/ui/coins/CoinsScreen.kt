@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -38,25 +39,30 @@ fun CoinScreenContent(state: State, onPushEvent: (UiEvent) -> Unit) = when (stat
             Scaffold(topBar = {
                 CoinsTopBar(title = stringResource(id = R.string.cryptocurrency_prices_title))
             }) { paddingValues ->
-                Column(
-                    modifier =
-                    Modifier
-                        .padding(paddingValues)
-                        .padding(top = Dimens.dimen_20)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(Dimens.dimen_8)
+                PullToRefreshBox(
+                    isRefreshing = state.isRefreshing,
+                    onRefresh = { onPushEvent(UiEvent.OnPullToRefresh) }
                 ) {
-                    CoinsToggleRow(isTop = state.isTop, onToggle = onPushEvent)
-                    HorizontalDivider(thickness = Dimens.dimen_1)
-                    LazyVerticalGrid(
+                    Column(
                         modifier =
                         Modifier
-                            .fillMaxSize()
-                            .padding(start = Dimens.dimen_16, end = Dimens.dimen_16),
-                        columns = GridCells.Fixed(count = 1),
-                        horizontalArrangement = Arrangement.spacedBy(space = Dimens.dimen_4)
+                            .padding(paddingValues)
+                            .padding(top = Dimens.dimen_20)
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.dimen_8)
                     ) {
-                        items(items = coins) { coin -> CoinRow(uiModel = coin) }
+                        CoinsToggleRow(isTop = state.isTop, onToggle = onPushEvent)
+                        HorizontalDivider(thickness = Dimens.dimen_1)
+                        LazyVerticalGrid(
+                            modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(start = Dimens.dimen_16, end = Dimens.dimen_16),
+                            columns = GridCells.Fixed(count = 1),
+                            horizontalArrangement = Arrangement.spacedBy(space = Dimens.dimen_4)
+                        ) {
+                            items(items = coins) { coin -> CoinRow(uiModel = coin) }
+                        }
                     }
                 }
             }

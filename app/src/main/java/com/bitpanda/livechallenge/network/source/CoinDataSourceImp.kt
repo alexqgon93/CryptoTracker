@@ -8,9 +8,7 @@ import com.bitpanda.livechallenge.network.utils.Failure
 import com.bitpanda.livechallenge.network.utils.tryCall
 import javax.inject.Inject
 
-class CoinDataSourceImp
-@Inject
-constructor(private val cryptoApi: CryptoCoroutinesApi) :
+class CoinDataSourceImp @Inject constructor(private val cryptoApi: CryptoCoroutinesApi) :
     CoinDataSource {
     override suspend fun getAssets(): Either<Failure, NetworkAssetResponse> = tryCall {
         cryptoApi.getAsset()

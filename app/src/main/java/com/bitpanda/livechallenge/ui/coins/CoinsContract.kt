@@ -4,7 +4,8 @@ interface CoinsContract {
     data class State(
         val screenState: ScreenState = ScreenState.LOADING,
         val isTop: Boolean = true,
-        val coins: List<CoinUIModel>? = null
+        val coins: List<CoinUIModel>? = null,
+        val isRefreshing: Boolean = false
     )
 
     sealed class UiEvent {
@@ -14,6 +15,8 @@ interface CoinsContract {
         data object OnBottomCoinsClick : UiEvent()
 
         data object OnRetryButtonClicked : UiEvent()
+
+        data object OnPullToRefresh : UiEvent()
     }
 }
 

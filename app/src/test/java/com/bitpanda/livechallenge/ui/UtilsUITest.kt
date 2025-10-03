@@ -1,27 +1,21 @@
 package com.bitpanda.livechallenge.ui
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class UtilsUITest {
     @Test
-    fun `format should round double to given digits`() {
-        val value = 3.14159
-        val result = value.format(2)
-        assertEquals(3.14, result, 0.0)
-    }
+    fun `GIVEN a double value WHEN formatToTwoDigits is called THEN it rounds to two digits`() =
+        Assertions.assertEquals(3.14, 3.14159.formatToTwoDigits())
 
     @Test
-    fun `toEuroString should format double as euro string`() {
-        val value = 1234.567
-        val result = value.toEuroString()
-        assertEquals("1,234.57 €", result)
-    }
+    fun `GIVEN double value WHEN toCorrectCurrencyForm THEN it returns euro string format`() =
+        Assertions.assertEquals(
+            "1.234,57 €",
+            1234.567.toCorrectCurrencyForm().replace('\u00A0', ' ')
+        )
 
     @Test
-    fun `formatToTwoDigits should round double to two digits`() {
-        val value = 2.71828
-        val result = value.formatToTwoDigits()
-        assertEquals(2.72, result, 0.0)
-    }
+    fun `GIVEN double value WHEN formatToTwoDigits THEN it rounds to two digits correctly`() =
+        Assertions.assertEquals(2.72, 2.71828.formatToTwoDigits())
 }
