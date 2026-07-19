@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val BASE_URL = "https://rest.coincap.io/v3/"
+    private const val AUTHORIZATION_HEADER = "Authorization"
+    private const val AUTHORIZATION_SCHEME = "Bearer"
 
     @Provides
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
@@ -33,7 +35,7 @@ object NetworkModule {
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
                 if (apiKey.isNotBlank()) {
-                    requestBuilder.header("Authorization", "Bearer $apiKey")
+                    requestBuilder.header(AUTHORIZATION_HEADER, "$AUTHORIZATION_SCHEME $apiKey")
                 }
                 chain.proceed(requestBuilder.build())
             }.addInterceptor(httpLoggingInterceptor)
@@ -49,6 +51,7 @@ object NetworkModule {
     @Provides
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
+            redactHeader(AUTHORIZATION_HEADER)
             level =
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BASIC

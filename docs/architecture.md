@@ -52,6 +52,13 @@ No module depends upward into `:app` or sideways into feature implementation det
 
 Network failures are normalized into data failures and then mapped into domain `AppError` values. Feature UI should render states derived from domain errors and should not inspect transport-specific exceptions.
 
+## Quality model
+
+- Build-time module boundaries keep dependencies reviewable and prevent feature implementation details from leaking into core modules.
+- Unit tests cover domain use cases, data mappers, repository behavior, network error mapping, and feature state transitions.
+- Compose UI tests cover important rendering and interaction paths for feature components.
+- CI runs the same core checks expected locally: unit tests, ktlint, Android lint, and debug assembly.
+
 ## Current trade-offs
 
 - `:core:domain` is an Android library for Gradle consistency, but it is kept Android-UI-free and only exposes pure Kotlin/domain APIs.
@@ -62,5 +69,6 @@ Network failures are normalized into data failures and then mapped into domain `
 ## Next evolution
 
 1. Add test fixtures and fake repositories to `:core:testing`.
-2. Add production-ready real-time updates only after the socket API contract and lifecycle behavior are validated.
+2. Introduce Gradle convention plugins to reduce repeated module configuration and keep quality gates consistent.
 3. Add offline/stale-cache support in a dedicated data/cache boundary if product scope grows.
+4. Add production-ready real-time updates only after the socket API contract and lifecycle behavior are validated.

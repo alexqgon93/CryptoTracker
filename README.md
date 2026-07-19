@@ -12,7 +12,7 @@ Crypto Tracker is a Jetpack Compose Android app that shows the best and worst pe
 
 ## Architecture
 
-The app uses a Staff+ multi-module architecture with Gradle-enforced boundaries:
+The app uses a production-style multi-module architecture with Gradle-enforced boundaries:
 
 ```text
 :app
@@ -39,6 +39,13 @@ Key technologies:
 - Gradle version catalog for dependency management.
 - ktlint, JUnit 5, MockK, Kotest assertions, and Compose UI tests.
 
+## Engineering highlights
+
+- **Explicit module ownership:** app, feature, UI, domain, data, network, and testing concerns are split into focused Gradle modules.
+- **Unidirectional data flow:** transport DTOs are mapped into domain models before feature state reaches Compose UI.
+- **Typed error propagation:** network/data failures are normalized into domain-level `AppError` values before presentation.
+- **Reviewable quality gates:** local and CI checks cover unit tests, ktlint, Android lint, and debug assembly.
+
 ## API configuration
 
 The app reads CoinCap data from `https://rest.coincap.io/v3/`.
@@ -49,7 +56,7 @@ Create `local.properties` in the repository root and add:
 api_key=YOUR_COINCAP_API_KEY
 ```
 
-If no key is present, debug builds still compile with an empty key so local development fails explicitly at the API boundary instead of during Gradle configuration. Release builds do not log full network bodies.
+If no key is present, debug builds still compile with an empty key so local development fails explicitly at the API boundary instead of during Gradle configuration. Network logging is limited in debug builds and disabled in release builds.
 
 ## How to run
 
