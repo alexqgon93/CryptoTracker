@@ -1,10 +1,3 @@
 <resources>
-    <string name="app_name">Candidate Live Challenge</string>
-
-    <string name="coins_fragment_label">Coins List</string>
-    <string name="trending_top_title">Top 10</string>
-    <string name="trending_lowest_title">Lowest 10</string>
-    <string name="cryptocurrency_prices_title">Cryptocurrency Prices</string>
-    <string name="retry_button_title">Retry</string>
-    <string name="error_message_title">Ups something went wrong</string>
+    <string name="app_name">Crypto Tracker</string>
 </resources>

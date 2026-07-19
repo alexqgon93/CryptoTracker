@@ -1,0 +1,18 @@
+<resources>
+    <string name="coins_fragment_label">Coins List</string>
+    <string name="trending_top_title">Top 10</string>
+    <string name="trending_lowest_title">Lowest 10</string>
+    <string name="cryptocurrency_prices_title">Cryptocurrency Prices</string>
+    <string name="retry_button_title">Retry</string>
+    <string name="error_message_title">Oops, something went wrong</string>
+    <string name="error_message_body">We could not load the latest prices. Please try again.</string>
+    <string name="error_icon_content_description">Prices could not be loaded</string>
+    <string name="retry_button_content_description">Retry loading prices</string>
+    <string name="empty_coins_title">No coins to display</string>
+    <string name="empty_coins_body">Pull to refresh and check for the latest market data.</string>
+    <string name="coins_list_content_description">Cryptocurrency price list</string>
+    <string name="top_coins_content_description">Show top 10 coins by 24 hour change</string>
+    <string name="lowest_coins_content_description">Show lowest 10 coins by 24 hour change</string>
+    <string name="selected_toggle_state">Selected</string>
+    <string name="not_selected_toggle_state">Not selected</string>
+</resources>
