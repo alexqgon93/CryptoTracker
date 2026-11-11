@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Launcher label shown under the app icon. -->
+    <string name="app_name">Crypto Tracker</string>
+</resources>
