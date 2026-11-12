@@ -1,6 +1,6 @@
 # Crypto Tracker
 
-Crypto Tracker is a Jetpack Compose Android app that shows the best and worst performing crypto assets over the last 24 hours, priced in Euro.
+An Android app that shows the best and worst performing crypto assets of the last 24 hours, priced in euro. I built it the way I would start a finance-facing product: market data is treated as untrusted input at the boundary, failures are typed instead of swallowed, and every layer can be tested on its own.
 
 Built as a take-home exercise and then polished.
 
@@ -83,11 +83,12 @@ Useful additional checks:
 
 The same checks are configured in GitHub Actions under `.github/workflows/android-quality.yml`.
 
-## Engineering trade-offs
+## Decisions and trade-offs
 
-- **Module boundaries:** the project uses Gradle modules to keep app, feature, UI, domain, data, network, and testing responsibilities explicit.
-- **REST first:** the current user experience is intentionally served through REST refreshes; speculative real-time socket code was removed until a production-ready API contract is validated.
-- **Domain-first mapping:** network DTOs are converted before reaching UI state, keeping formatting and presentation concerns outside network/data layers.
+- **Typed errors, not silent failures.** Network and data failures are normalized into domain-level `AppError` values (Arrow `Either`) before they reach the UI, so the screen can offer a proper retry instead of an empty list. Cost: more mapping code than catching exceptions in the ViewModel.
+- **Domain models, not DTOs.** Transport DTOs are mapped before they reach UI state, so formatting and presentation stay out of the network and data layers. Cost: mapper boilerplate. In exchange, an API change touches one layer.
+- **REST first, real-time later.** The current experience is served by REST refreshes. I removed speculative socket code until the API contract, lifecycle, retry behaviour and tests are validated: a price feed that reconnects badly is worse than a manual refresh. Cost: no live prices.
+- **Fail at the API boundary.** A missing API key still compiles, so the failure shows up where the request is made instead of during Gradle configuration. Network logging is limited in debug builds and off in release.
 
 ## Roadmap
 
